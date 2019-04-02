@@ -85,7 +85,7 @@ create or replace PACKAGE BODY GESTION_SCORE AS
     SELECT j.nom, j.prenom, NOMCATEGORIE FROM SCORES S 
     INNER JOIN JOUEURS2 J ON S.ALIAS = J.ALIAS 
     INNER JOIN CATEGORIES C ON C.CODECATEGORIE = S.CODECATEGORIE
-    WHERE SCORE < 5 AND J.ALIAS = PALIAS;
+    WHERE SCORE < 5 and s.codecategorie not in (select codecategorie from scores where score >= 5) and s.alias = palias;
     RETURN LISTE;
   END;
   
